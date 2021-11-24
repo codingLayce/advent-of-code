@@ -22,3 +22,11 @@ List<String> readStringData(String path) {
   File file = File(path);
   return file.readAsLinesSync();
 }
+
+int largestElement(List<int> list) {
+  return list.reduce((value, element) => element > value ? element : value);
+}
+
+int smallestElement(List<int> list) {
+  return list.reduce((value, element) => element < value ? element : value);
+}

@@ -69,9 +69,5 @@ int sumList(List<int> numbers) {
 }
 
 int sumSmallLarge(List<int> numbers) {
-  int smallest =
-      numbers.reduce((value, element) => element < value ? element : value);
-  int largest =
-      numbers.reduce((value, element) => element > value ? element : value);
-  return smallest + largest;
+  return smallestElement(numbers) + largestElement(numbers);
 }
