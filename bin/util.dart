@@ -1,10 +1,72 @@
 import 'dart:io';
 
+// Maths
+class Vector {
+  int x;
+  int y;
+
+  Vector(this.x, this.y);
+
+  static Vector copy(Vector vec) {
+    return Vector(vec.x, vec.y);
+  }
+
+  bool equal(Vector other) {
+    return (other.x == x && other.y == y);
+  }
+
+  void addVector(Vector other) {
+    x += other.x;
+    y += other.y;
+  }
+
+  void add({int x = 0, int y = 0}) {
+    this.x += x;
+    this.y += y;
+  }
+
+  void minusVector(Vector other) {
+    x -= other.x;
+    y -= other.y;
+  }
+
+  void minus({int x = 0, int y = 0}) {
+    this.x -= x;
+    this.y -= y;
+  }
+
+  void multiply(int scalar) {
+    x *= scalar;
+    y *= scalar;
+  }
+
+  // Can only rotate by 90° multiples
+  void rotate(int degree) {
+    switch (degree) {
+      case 90:
+        int newX = y;
+        int newY = -x;
+        x = newX;
+        y = newY;
+        break;
+      case 180:
+        x = -x;
+        y = -y;
+        break;
+      case 270:
+        int newX = -y;
+        int newY = x;
+        x = newX;
+        y = newY;
+    }
+  }
+}
+
 // Lifecycle
 void processPuzzle(index, resolver) {
   Stopwatch s = Stopwatch()..start();
 
-  int result = resolver();
+  num result = resolver();
   s.stop();
   print("Puzzle $index: $result in ${s.elapsed.inMilliseconds} ms");
   s.reset();
