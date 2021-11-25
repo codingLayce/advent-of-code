@@ -30,3 +30,7 @@ int largestElement(List<int> list) {
 int smallestElement(List<int> list) {
   return list.reduce((value, element) => element < value ? element : value);
 }
+
+int index2DIn1D(int x, int y, int width) {
+  return width * y + x;
+}
