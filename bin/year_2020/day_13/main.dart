@@ -46,6 +46,8 @@ resolve2(List<String> data) {
   int max = largestElement(buses);
   int step = max - buses.indexOf(max);
 
+  print("unefficient solution that will run for a very very long time...");
+
   // Base the step on the max bus ID multiples - offset
   while (!satistied(buses, timestamp)) {
     timestamp += step;

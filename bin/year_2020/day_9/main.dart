@@ -64,10 +64,6 @@ bool solutionExists(ListQueue<int> numbers, int value) {
   return false;
 }
 
-int sumList(List<int> numbers) {
-  return numbers.reduce((value, element) => value + element);
-}
-
 int sumSmallLarge(List<int> numbers) {
   return smallestElement(numbers) + largestElement(numbers);
 }

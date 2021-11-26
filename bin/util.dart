@@ -69,6 +69,10 @@ List<int> stringListToIntList(List<String> list) {
   return list.map((e) => int.parse(e)).toList();
 }
 
+int sumList(List<int> numbers) {
+  return numbers.reduce((value, element) => value + element);
+}
+
 // Lifecycle
 void processPuzzle(index, resolver) {
   Stopwatch s = Stopwatch()..start();

@@ -1,5 +1,4 @@
 import '../../util.dart';
-import '../day_9/main.dart';
 
 int main(List<String> args) {
   if (args.length != 1) return 1;
