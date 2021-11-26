@@ -1,9 +1,52 @@
-import 'dart:ffi';
 import 'dart:io';
 
-import 'dart:typed_data';
-
 // Maths
+class Vector3 {
+  int x;
+  int y;
+  int z;
+
+  Vector3(this.x, this.y, this.z);
+
+  static Vector3 copy(Vector3 vec) {
+    return Vector3(vec.x, vec.y, vec.z);
+  }
+
+  bool equal(Vector3 other) {
+    return (other.x == x && other.y == y && other.z == z);
+  }
+
+  void addVector(Vector3 other) {
+    x += other.x;
+    y += other.y;
+    z += other.z;
+  }
+
+  void add({int x = 0, int y = 0, int z = 0}) {
+    this.x += x;
+    this.y += y;
+    this.z = z;
+  }
+
+  void minusVector(Vector3 other) {
+    x -= other.x;
+    y -= other.y;
+    z -= other.z;
+  }
+
+  void minus({int x = 0, int y = 0, int z = 0}) {
+    this.x -= x;
+    this.y -= y;
+    this.z -= z;
+  }
+
+  void multiply(int scalar) {
+    x *= scalar;
+    y *= scalar;
+    z *= scalar;
+  }
+}
+
 class Vector {
   int x;
   int y;
@@ -73,6 +116,18 @@ int sumList(List<int> numbers) {
   return numbers.reduce((value, element) => value + element);
 }
 
+int largestElement(List<int> list) {
+  return list.reduce((value, element) => element > value ? element : value);
+}
+
+int smallestElement(List<int> list) {
+  return list.reduce((value, element) => element < value ? element : value);
+}
+
+int index2DIn1D(int x, int y, int width) {
+  return width * y + x;
+}
+
 // Lifecycle
 void processPuzzle(index, resolver) {
   Stopwatch s = Stopwatch()..start();
@@ -94,16 +149,4 @@ List<int> readIntData(String path) {
 List<String> readStringData(String path) {
   File file = File(path);
   return file.readAsLinesSync();
-}
-
-int largestElement(List<int> list) {
-  return list.reduce((value, element) => element > value ? element : value);
-}
-
-int smallestElement(List<int> list) {
-  return list.reduce((value, element) => element < value ? element : value);
-}
-
-int index2DIn1D(int x, int y, int width) {
-  return width * y + x;
 }
