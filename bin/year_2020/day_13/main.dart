@@ -38,6 +38,41 @@ resolve1(List<String> data) {
   return earliestBus * diff;
 }
 
+// My first idea was to brute force, but use a little bit my brain and calculate a bigger step that only the first bus.
+// But it's absolutly unefficient ! I know I have to use CRT to solve it, but...
 resolve2(List<String> data) {
-  return 0;
+  List<int> buses = busesAsNum(data[1].split(","));
+  int timestamp = buses[0];
+  int max = largestElement(buses);
+  int step = max - buses.indexOf(max);
+
+  // Base the step on the max bus ID multiples - offset
+  while (!satistied(buses, timestamp)) {
+    timestamp += step;
+  }
+
+  return timestamp;
+}
+
+bool satistied(List<int> values, int timestamp) {
+  int cur = timestamp;
+  for (int value in values) {
+    if ((value != -1) && ((cur % value) != 0)) return false;
+    cur++;
+  }
+
+  return true;
+}
+
+List<int> busesAsNum(List<String> buses) {
+  List<int> busesNum = [];
+
+  for (String bus in buses) {
+    if (bus == "x") {
+      busesNum.add(-1);
+    } else {
+      busesNum.add(int.parse(bus));
+    }
+  }
+  return busesNum;
 }

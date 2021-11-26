@@ -1,4 +1,7 @@
+import 'dart:ffi';
 import 'dart:io';
+
+import 'dart:typed_data';
 
 // Maths
 class Vector {
@@ -62,6 +65,10 @@ class Vector {
   }
 }
 
+List<int> stringListToIntList(List<String> list) {
+  return list.map((e) => int.parse(e)).toList();
+}
+
 // Lifecycle
 void processPuzzle(index, resolver) {
   Stopwatch s = Stopwatch()..start();
@@ -77,7 +84,7 @@ List<int> readIntData(String path) {
   File file = File(path);
   List<String> lines = file.readAsLinesSync();
 
-  return lines.map((e) => int.parse(e)).toList();
+  return stringListToIntList(lines);
 }
 
 List<String> readStringData(String path) {
