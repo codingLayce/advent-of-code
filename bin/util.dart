@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:quiver/core.dart';
 
 // Maths
 class Vector3 {
@@ -12,9 +13,13 @@ class Vector3 {
     return Vector3(vec.x, vec.y, vec.z);
   }
 
-  bool equal(Vector3 other) {
-    return (other.x == x && other.y == y && other.z == z);
+  @override
+  String toString() {
+    return "($x:$y:$z)";
   }
+
+  @override
+  bool operator ==(o) => o is Vector3 && o.x == x && o.y == y && o.z == z;
 
   void addVector(Vector3 other) {
     x += other.x;
@@ -45,6 +50,9 @@ class Vector3 {
     y *= scalar;
     z *= scalar;
   }
+
+  @override
+  int get hashCode => hash3(x.hashCode, y.hashCode, z.hashCode);
 }
 
 class Vector {
