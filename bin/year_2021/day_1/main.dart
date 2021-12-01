@@ -26,14 +26,14 @@ int resolve1(List<int> data) {
 
 int resolve2(List<int> data) {
   int count = 0;
-  int sum = double.maxFinite.toInt();
+  int previousSum = double.maxFinite.toInt();
 
   for (int i = 2; i < data.length; i++) {
-    int curSum = data[i] + data[i - 1] + data[i - 2];
-    if (curSum > sum) {
+    int sum = data[i] + data[i - 1] + data[i - 2];
+    if (sum > previousSum) {
       count++;
     }
-    sum = curSum;
+    previousSum = sum;
   }
 
   return count;
