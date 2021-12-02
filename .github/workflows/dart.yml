@@ -42,6 +42,6 @@ jobs:
         run: |
           for year in $(ls test); do
             for day in $(ls ${year}); do
-              dart test tests/${year}/${day}/test.dart
+              dart test test/${year}/${day}/test.dart
             done
           done
