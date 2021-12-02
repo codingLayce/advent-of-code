@@ -1,3 +1,4 @@
+import '../../errors.dart';
 import '../../util.dart';
 
 int main(List<String> args) {
@@ -5,7 +6,7 @@ int main(List<String> args) {
     return 1;
   }
 
-  List<int> data = readIntData(args[0]);
+  List<String> data = readStringData(args[0]);
 
   processPuzzle(1, () => resolve1(data));
 
@@ -14,8 +15,11 @@ int main(List<String> args) {
   return 0;
 }
 
-Future<int> resolve1(List<int> data) async {
+Future<int> resolve1(List<String> strings) async {
+  List<int> data = stringListToIntList(strings);
   int count = 0;
+
+  if (data.isEmpty) throw EmptyDataException();
 
   for (int i = 1; i < data.length; i++) {
     if (data[i] > data[i - 1]) count++;
@@ -24,9 +28,12 @@ Future<int> resolve1(List<int> data) async {
   return count;
 }
 
-Future<int> resolve2(List<int> data) async {
+Future<int> resolve2(List<String> strings) async {
+  List<int> data = stringListToIntList(strings);
   int count = 0;
   int previousSum = double.maxFinite.toInt();
+
+  if (data.isEmpty) throw EmptyDataException();
 
   for (int i = 2; i < data.length; i++) {
     int sum = data[i] + data[i - 1] + data[i - 2];

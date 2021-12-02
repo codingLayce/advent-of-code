@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 
 import '../../../bin/errors.dart';
-import '../../../bin/test_util.dart';
+import '../../test_util.dart';
 import '../../../bin/util.dart';
 import '../../../bin/year_2021/day_2/main.dart';
 
@@ -12,7 +12,7 @@ List<Test> testCases1 = [
       resolve1,
       150,
       null),
-  Test("Puzzl - OK", readStringData("bin/year_2021/day_2/input.txt"), resolve1,
+  Test("Puzzle - OK", readStringData("bin/year_2021/day_2/input.txt"), resolve1,
       1714680, null),
   Test("Empty data - KO", [], resolve1, null, isA<EmptyDataException>()),
   Test("Unknown move - KO", ["forward 1", "up 5", "left 8", "down 2"], resolve1,
@@ -28,7 +28,7 @@ List<Test> testCases2 = [
       resolve2,
       900,
       null),
-  Test("Puzzl - OK", readStringData("bin/year_2021/day_2/input.txt"), resolve2,
+  Test("Puzzle - OK", readStringData("bin/year_2021/day_2/input.txt"), resolve2,
       1963088820, null),
   Test("Empty data - KO", [], resolve2, null, isA<EmptyDataException>()),
   Test("Unknown move - KO", ["forward 1", "up 5", "left 8", "down 2"], resolve2,
