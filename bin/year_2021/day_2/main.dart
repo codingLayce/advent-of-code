@@ -1,3 +1,4 @@
+import '../../errors.dart';
 import '../../util.dart';
 
 int main(List<String> args) {
@@ -14,44 +15,60 @@ int main(List<String> args) {
   return 0;
 }
 
-int resolve1(List<String> data) {
+Future<int> resolve1(List<String> data) async {
   int horizontal = 0;
   int depth = 0;
+
+  if (data.isEmpty) throw EmptyDataException();
 
   for (String str in data) {
     var move = str.split(" ");
     String direction = move[0];
-    int distance = int.parse(move[1]);
+    int? distance = int.parse(move[1]);
 
-    if (direction == "forward") {
-      horizontal += distance;
-    } else if (direction == "down") {
-      depth += distance;
-    } else {
-      depth -= distance;
+    switch (direction) {
+      case "forward":
+        horizontal += distance;
+        break;
+      case "down":
+        depth += distance;
+        break;
+      case "up":
+        depth -= distance;
+        break;
+      default:
+        throw InvalidMoveException(direction);
     }
   }
 
   return horizontal * depth;
 }
 
-int resolve2(List<String> data) {
+Future<int> resolve2(List<String> data) async {
   int horizontal = 0;
   int depth = 0;
   int aim = 0;
 
+  if (data.isEmpty) throw EmptyDataException();
+
   for (String str in data) {
     var move = str.split(" ");
     String direction = move[0];
-    int distance = int.parse(move[1]);
+    int? distance = int.parse(move[1]);
 
-    if (direction == "forward") {
-      horizontal += distance;
-      depth += (aim * distance);
-    } else if (direction == "down") {
-      aim += distance;
-    } else {
-      aim -= distance;
+    switch (direction) {
+      case "forward":
+        horizontal += distance;
+        depth += (aim * distance);
+        break;
+      case "down":
+        aim += distance;
+        break;
+      case "up":
+        aim -= distance;
+        break;
+      default:
+        throw InvalidMoveException(direction);
     }
   }
 

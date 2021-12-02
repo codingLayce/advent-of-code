@@ -14,7 +14,7 @@ int main(List<String> args) {
   return 0;
 }
 
-int resolve1(List<int> data) {
+Future<int> resolve1(List<int> data) async {
   int count = 0;
 
   for (int i = 1; i < data.length; i++) {
@@ -24,7 +24,7 @@ int resolve1(List<int> data) {
   return count;
 }
 
-int resolve2(List<int> data) {
+Future<int> resolve2(List<int> data) async {
   int count = 0;
   int previousSum = double.maxFinite.toInt();
 

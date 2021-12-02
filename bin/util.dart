@@ -137,13 +137,13 @@ int index2DIn1D(int x, int y, int width) {
 }
 
 // Lifecycle
-void processPuzzle(index, resolver) {
+void processPuzzle(index, Future<int> Function() resolver) async {
   Stopwatch s = Stopwatch()..start();
-
-  num result = resolver();
-  s.stop();
-  print("Puzzle $index: $result in ${s.elapsed.inMilliseconds} ms");
-  s.reset();
+  resolver().then((value) {
+    print("Puzzle ($index) $value in ${s.elapsed.inMilliseconds} ms");
+  }).catchError((error) {
+    print("Puzzle ($index) Error: $error");
+  }).whenComplete(() => s.stop());
 }
 
 // Reading
