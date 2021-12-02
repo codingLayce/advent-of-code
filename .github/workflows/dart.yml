@@ -41,7 +41,7 @@ jobs:
       - name: Run tests
         run: |
           for year in $(ls test); do
-            for day in $(ls); do
-              dart test tests/year/day/test.dart
+            for day in $(ls ${year}); do
+              dart test tests/${year}/${day}/test.dart
             done
           done
