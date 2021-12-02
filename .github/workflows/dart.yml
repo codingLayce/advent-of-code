@@ -40,7 +40,7 @@ jobs:
       # want to change this to 'flutter test'.
       - name: Run tests
         run: |
-          for year in $(ls tests); do
+          for year in $(ls test); do
             for day in $(ls); do
               dart test tests/year/day/test.dart
             done
