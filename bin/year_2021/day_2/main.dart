@@ -24,7 +24,7 @@ Future<int> resolve1(List<String> data) async {
   for (String str in data) {
     var move = str.split(" ");
     String direction = move[0];
-    int? distance = int.parse(move[1]);
+    int distance = int.parse(move[1]);
 
     switch (direction) {
       case "forward":
@@ -54,7 +54,7 @@ Future<int> resolve2(List<String> data) async {
   for (String str in data) {
     var move = str.split(" ");
     String direction = move[0];
-    int? distance = int.parse(move[1]);
+    int distance = int.parse(move[1]);
 
     switch (direction) {
       case "forward":
