@@ -16,35 +16,14 @@ int main(List<String> args) {
 }
 
 Future<int> resolve1(List<String> data) async {
-  List<int> bitsSet = List.filled(data[0].length, 0);
-  List<int> bitsUnset = List.filled(data[0].length, 0);
-
-  for (int i = 0; i < data[0].length; i++) {
-    for (String line in data) {
-      if (line[i] == "1") {
-        bitsSet[i]++;
-      } else {
-        bitsUnset[i]++;
-      }
-    }
-  }
-
   String gammaRateStr = "";
-  for (int i = 0; i < bitsSet.length; i++) {
-    if (bitsSet[i] > bitsUnset[i]) {
-      gammaRateStr = "${gammaRateStr}1";
-    } else {
-      gammaRateStr = "${gammaRateStr}0";
-    }
+  for (int i = 0; i < data[0].length; i++) {
+    gammaRateStr = "$gammaRateStr${findMostCommonBit(data, i)}";
   }
 
   String epsilonRateStr = "";
-  for (int i = 0; i < gammaRateStr.length; i++) {
-    if (gammaRateStr[i] == "1") {
-      epsilonRateStr = "${epsilonRateStr}0";
-    } else {
-      epsilonRateStr = "${epsilonRateStr}1";
-    }
+  for (int i = 0; i < data[0].length; i++) {
+    epsilonRateStr = "$epsilonRateStr${findLeastCommonBit(data, i)}";
   }
 
   int gammaRate = int.parse(gammaRateStr, radix: 2);
