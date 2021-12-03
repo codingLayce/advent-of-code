@@ -14,6 +14,11 @@ List<Test> testCases1 = [
       null),
   Test("Puzzle - OK", readStringData("bin/year_2021/day_3/input.txt"), resolve1,
       1092896, null),
+  Test("Empty data - KO", [], resolve1, null, isA<EmptyDataException>()),
+  Test("Binary of different sizes - KO", ["001", "00", "001011"], resolve1,
+      null, isA<ElementSizeDifferentException>()),
+  Test("Non binary elements - KO", ["0012", "0110"], resolve1, null,
+      isA<NotBinaryException>())
 ];
 
 List<Test> testCases2 = [
@@ -25,6 +30,11 @@ List<Test> testCases2 = [
       null),
   Test("Puzzle - OK", readStringData("bin/year_2021/day_3/input.txt"), resolve2,
       4672151, null),
+  Test("Empty data - KO", [], resolve2, null, isA<EmptyDataException>()),
+  Test("Binary of different sizes - KO", ["001", "00", "001011"], resolve2,
+      null, isA<ElementSizeDifferentException>()),
+  Test("Non binary elements - KO", ["0012", "0110"], resolve2, null,
+      isA<NotBinaryException>())
 ];
 
 void main() {

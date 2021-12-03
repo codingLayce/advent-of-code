@@ -16,6 +16,12 @@ int main(List<String> args) {
 }
 
 Future<int> resolve1(List<String> data) async {
+  try {
+    validateData(data);
+  } catch (e) {
+    rethrow;
+  }
+
   String gammaRateStr = "";
   for (int i = 0; i < data[0].length; i++) {
     gammaRateStr = "$gammaRateStr${findMostCommonBit(data, i)}";
@@ -33,6 +39,12 @@ Future<int> resolve1(List<String> data) async {
 }
 
 Future<int> resolve2(List<String> data) async {
+  try {
+    validateData(data);
+  } catch (e) {
+    rethrow;
+  }
+
   int oxygenGenratorRating = getOxygenGeneratorRating(List.from(data), 0);
   int co2ScrubberRating = getCo2ScrubberRating(List.from(data), 0);
 
@@ -42,14 +54,18 @@ Future<int> resolve2(List<String> data) async {
 int getCo2ScrubberRating(List<String> data, int index) {
   int leastCommonBit = findLeastCommonBit(data, index);
   data.removeWhere((element) => element[index] != "$leastCommonBit");
+
   if (data.length == 1) return int.parse(data.single, radix: 2);
+
   return getCo2ScrubberRating(data, index + 1);
 }
 
 int getOxygenGeneratorRating(List<String> data, int index) {
   int mostCommonBit = findMostCommonBit(data, index);
   data.removeWhere((element) => element[index] != "$mostCommonBit");
+
   if (data.length == 1) return int.parse(data.single, radix: 2);
+
   return getOxygenGeneratorRating(data, index + 1);
 }
 
@@ -65,4 +81,20 @@ int findMostCommonBit(List<String> data, int index) {
   }
 
   return countSet >= data.length / 2 ? 1 : 0;
+}
+
+void validateData(List<String> data) {
+  if (data.isEmpty) throw EmptyDataException();
+
+  for (int i = 0; i < data.length; i++) {
+    if (int.tryParse(data[i], radix: 2) == null) {
+      throw NotBinaryException(data[i]);
+    }
+
+    if (i == 0) continue;
+
+    if (data[i].length != data[i - 1].length) {
+      throw ElementSizeDifferentException();
+    }
+  }
 }
