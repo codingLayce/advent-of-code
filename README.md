@@ -11,3 +11,21 @@ I'am making my solutions in dart.
 ```
 dart run bin/advent_of_code.dart -y <year> -d <day>
 ```
+
+# How to run tests ?
+
+### Single test
+
+```
+dart test test/year_xxxx/day_xx/test.dart
+```
+
+### All tests
+
+```
+for year in $(ls -d test/*/); do 
+  for day in $(ls -d ${year}*/); do 
+    dart test ${day}test.dart
+  done
+done
+```
