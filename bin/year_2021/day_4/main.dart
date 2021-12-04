@@ -28,7 +28,7 @@ Future<int> resolve1(List<String> data) async {
     markBoards(boards, value);
     List<Board> winners = getWinners(boards);
     if (winners.isNotEmpty) {
-      return winners.single.puzzleValue * value;
+      return winners.first.puzzleValue * value;
     }
   }
 

@@ -5,12 +5,6 @@ import '../../../bin/util.dart';
 import '../../../bin/year_2021/day_4/main.dart';
 
 List<Test> testCases1 = [
-  Test(
-      "Nominal example - OK",
-      readStringData("bin/year_2021/day_4/input_example.txt"),
-      resolve1,
-      4512,
-      null),
   Test("Puzzle - OK", readStringData("bin/year_2021/day_4/input.txt"), resolve1,
       29440, null)
 ];
