@@ -61,9 +61,18 @@ class Vector {
 
   Vector(this.x, this.y);
 
+  @override
+  String toString() => "$x:$y";
+
   static Vector copy(Vector vec) {
     return Vector(vec.x, vec.y);
   }
+
+  @override
+  bool operator ==(o) => o is Vector && o.x == x && o.y == y;
+
+  @override
+  int get hashCode => hash2(x.hashCode, y.hashCode);
 
   bool equal(Vector other) {
     return (other.x == x && other.y == y);
@@ -92,6 +101,29 @@ class Vector {
   void multiply(int scalar) {
     x *= scalar;
     y *= scalar;
+  }
+
+  Vector direction(Vector other) {
+    int dirX;
+    int dirY;
+
+    if (x < other.x) {
+      dirX = 1;
+    } else if (x > other.x) {
+      dirX = -1;
+    } else {
+      dirX = 0;
+    }
+
+    if (y < other.y) {
+      dirY = 1;
+    } else if (y > other.y) {
+      dirY = -1;
+    } else {
+      dirY = 0;
+    }
+
+    return Vector(dirX, dirY);
   }
 
   // Can only rotate by 90° multiples
