@@ -19,34 +19,30 @@ Future<int> resolve1(List<String> data) async {
 }
 
 Future<int> resolve2(List<String> data) async {
-  return solve(data, 256);
+  return solve(data, 256 * 10000);
 }
 
 int solve(List<String> data, int max) {
   List<int> lanternFishes = stringListToIntList(data[0].split(","));
 
-  Map<int, int> cache = {};
+  List<int> cache = List.filled(max, 0);
 
-  for (int i = 1; i <= max; i++) {
-    cache[i] = 0;
-  }
-
-  for (int i = max; i > 0; i--) {
+  for (int i = max - 1; i > 0; i--) {
     int count = 1;
 
     if (i + 7 < max) {
-      count += cache[i + 7]!;
+      count += cache[i + 7 - 1];
     }
     if (i + 9 < max) {
-      count += cache[i + 9]!;
+      count += cache[i + 9 - 1];
     }
 
-    cache[i] = count;
+    cache[i - 1] = count;
   }
 
   int sum = lanternFishes.length;
   for (int i in lanternFishes) {
-    sum += cache[i]!;
+    sum += cache[i - 1];
   }
 
   return sum;
