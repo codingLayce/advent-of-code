@@ -19,7 +19,7 @@ Future<int> resolve1(List<String> data) async {
 }
 
 Future<int> resolve2(List<String> data) async {
-  return solve(data, 256 * 10000);
+  return solve(data, 256);
 }
 
 int solve(List<String> data, int max) {
