@@ -164,6 +164,26 @@ int smallestElement(List<int> list) {
   return list.reduce((value, element) => element < value ? element : value);
 }
 
+int mostOccuredElement(List<int> list) {
+  Map<int, int> map = {};
+  int max = 1;
+  int res = -1;
+
+  for (int i in list) {
+    if (map.containsKey(i)) {
+      map[i] = map[i]! + 1;
+      if (map[i]! > max) {
+        max = map[i]!;
+        res = i;
+      }
+    } else {
+      map[i] = 1;
+    }
+  }
+
+  return res;
+}
+
 int index2DIn1D(int x, int y, int width) {
   return width * y + x;
 }
