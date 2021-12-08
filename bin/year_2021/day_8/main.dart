@@ -129,7 +129,7 @@ class Wires {
     // Find the 2, 3 & 5
     List<String> possibles = _getOfLength(5);
 
-    // Find the 3 (the only one with all his parts included either in 2 or 5)
+    // Find the 3 (the only one which includes all the parts of 1)
     String trois = _getTrois(possibles);
     correspondings[3] = wires.indexOf(trois);
     possibles.remove(trois);
@@ -162,17 +162,9 @@ class Wires {
   }
 
   String _getTrois(List<String> possibles) {
+    String un = wires[correspondings[1]];
     for (String wire in possibles) {
-      bool ok = true;
-      for (int i = 0; i < 5; i++) {
-        String part = wire[i];
-        int nb = 0;
-        for (String other in possibles) {
-          if (other.contains(part)) nb++;
-        }
-        if (nb <= 1) ok = false;
-      }
-      if (ok) {
+      if (_countCommon(un, wire) == 2) {
         return wire;
       }
     }
