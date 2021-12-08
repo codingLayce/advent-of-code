@@ -102,27 +102,17 @@ class Wires {
     List<String> possibles = _getOfLength(6);
 
     // Find 9 (the only one which includes all the parts of 4)
-    String neuf = "";
-    String quatre = wires[correspondings[4]];
-    for (String wire in possibles) {
-      if (_countCommon(quatre, wire) == quatre.length) {
-        neuf = wire;
-        break;
-      }
-    }
+    String neuf = _get(possibles, wires[correspondings[4]], 4);
     correspondings[9] = wires.indexOf(neuf);
     possibles.remove(neuf);
 
-    String un = wires[correspondings[1]];
+    // Find 0 (the only one which includes all the parts of 1)
+    String zero = _get(possibles, wires[correspondings[1]], 2);
+    correspondings[0] = wires.indexOf(zero);
+    possibles.remove(zero);
 
-    // Find 0 (the only one which includes all the parts of 1) and 6 (the one remaining)
-    if (_countCommon(possibles[0], un) == 2) {
-      correspondings[0] = wires.indexOf(possibles[0]);
-      correspondings[6] = wires.indexOf(possibles[1]);
-    } else {
-      correspondings[0] = wires.indexOf(possibles[1]);
-      correspondings[6] = wires.indexOf(possibles[0]);
-    }
+    // Find 6 (the one remaining)
+    correspondings[6] = wires.indexOf(possibles.first);
   }
 
   void _determineLength5() {
@@ -130,23 +120,22 @@ class Wires {
     List<String> possibles = _getOfLength(5);
 
     // Find the 3 (the only one which includes all the parts of 1)
-    String trois = _getTrois(possibles);
+    String trois = _get(possibles, wires[correspondings[1]], 2);
     correspondings[3] = wires.indexOf(trois);
     possibles.remove(trois);
 
     // Find the 5 (the only one with 3 parts included in 4)
-    String cinq = _getFive(possibles);
+    String cinq = _get(possibles, wires[correspondings[4]], 3);
     correspondings[5] = wires.indexOf(cinq);
+    possibles.remove(cinq);
 
     // Find 2 (the one remaining)
-    possibles.remove(cinq);
     correspondings[2] = wires.indexOf(possibles.first);
   }
 
-  String _getFive(List<String> possibles) {
-    String quatre = wires[correspondings[4]];
+  String _get(List<String> possibles, String tester, int length) {
     for (String wire in possibles) {
-      if (_countCommon(quatre, wire) == 3) {
+      if (_countCommon(wire, tester) == length) {
         return wire;
       }
     }
@@ -159,16 +148,6 @@ class Wires {
       if (wires[i].length == length) get.add(wires[i]);
     }
     return get;
-  }
-
-  String _getTrois(List<String> possibles) {
-    String un = wires[correspondings[1]];
-    for (String wire in possibles) {
-      if (_countCommon(un, wire) == 2) {
-        return wire;
-      }
-    }
-    return "";
   }
 
   int _countCommon(String a, String b) {
