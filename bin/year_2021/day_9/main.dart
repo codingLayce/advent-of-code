@@ -42,7 +42,7 @@ int solve(List<List<int>> heightmap) {
     for (int x = 0; x < heightmap[y].length; x++) {
       if (heightmap[y][x] == 9 || isInABasin(Vector(x, y), basins)) continue;
       List<Vector> basin = [];
-      putInBasin(Vector(x, y), heightmap, basin);
+      putInBasinRec(Vector(x, y), heightmap, basin);
       basins.add(basin);
     }
   }
@@ -65,13 +65,13 @@ bool isInABasin(Vector vec, List<List<Vector>> basins) {
   return false;
 }
 
-void putInBasin(Vector vec, List<List<int>> heightmap, List<Vector> basin) {
+void putInBasinRec(Vector vec, List<List<int>> heightmap, List<Vector> basin) {
   List<Vector> adjs = getAdjs(vec, heightmap);
 
   for (Vector adj in adjs) {
     if (heightmap[adj.y][adj.x] == 9 || basin.contains(adj)) continue;
     basin.add(adj);
-    putInBasin(adj, heightmap, basin);
+    putInBasinRec(adj, heightmap, basin);
   }
 }
 
