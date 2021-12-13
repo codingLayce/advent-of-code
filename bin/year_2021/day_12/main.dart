@@ -27,7 +27,7 @@ Future<int> resolve2(List<String> data) async {
   Node root = parse(data);
 
   Solver2 solver = Solver2();
-  solver.distinctPaths(root);
+  solver.distinctPaths(root, Path());
 
   return solver.count;
 }
@@ -75,24 +75,48 @@ class Node {
   }
 }
 
+class Path {
+  String path = "";
+  bool hasDouble = false;
+
+  Path copy() {
+    Path p = Path();
+
+    p.path = path;
+    p.hasDouble = hasDouble;
+
+    return p;
+  }
+
+  bool canAdd(Node node) {
+    if (node.name == "start" ||
+        (!node.isBigCave && hasDouble && path.contains(node.name))) {
+      return false;
+    }
+    return true;
+  }
+
+  void add(Node node) {
+    if (!node.isBigCave && !hasDouble && path.contains(node.name)) {
+      hasDouble = true;
+    }
+    path = "$path${node.name},";
+  }
+}
+
 class Solver2 {
   int count = 0;
-  Map<String, int> visited = {};
 
-  void distinctPaths(Node node) {
-    if (node.name == "end") count++;
+  void distinctPaths(Node node, Path path) {
+    if (node.name == "end") {
+      count++;
+      return;
+    }
 
-    if (!node.isBigCave &&
-        visited.containsKey(node.name) &&
-        visited[node.name]! > 2) return;
+    path.add(node);
 
     for (Node child in node.connections) {
-      if (visited.containsKey(child.name)) {
-        visited[child.name] = visited[child.name]! + 1;
-      } else {
-        visited[child.name] = 1;
-      }
-      distinctPaths(child);
+      if (path.canAdd(child)) distinctPaths(child, path.copy());
     }
   }
 }
