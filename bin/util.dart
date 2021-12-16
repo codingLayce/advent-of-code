@@ -156,6 +156,10 @@ int sumList(List<int> numbers) {
   return numbers.reduce((value, element) => value + element);
 }
 
+int productList(List<int> numbers) {
+  return numbers.reduce((value, element) => value * element);
+}
+
 int largestElement(List<int> list) {
   return list.reduce((value, element) => element > value ? element : value);
 }
@@ -186,6 +190,14 @@ int mostOccuredElement(List<int> list) {
 
 int index2DIn1D(int x, int y, int width) {
   return width * y + x;
+}
+
+String removeTrailling(String source, String char) {
+  int i = source.length;
+  while (source.startsWith(char, i - char.length)) {
+    i -= char.length;
+  }
+  return source.substring(0, i);
 }
 
 // Lifecycle
